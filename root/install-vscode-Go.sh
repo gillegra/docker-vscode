@@ -1,7 +1,7 @@
 #!/bin/sh
 dir=$(cd `dirname "$0"` && pwd)
 # publisher extension version
-$dir/install-vscode-extension.sh lukehoban Go 0.6.69
+su - vscode -c "code --install-extension lukehoban.go"
 
 #see https://github.com/ctaggart/golang-vscode/issues/8
 # echo 'export GOPATH=$HOME/go' >> ~/.bash_profile
