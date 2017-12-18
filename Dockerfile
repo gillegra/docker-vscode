@@ -9,11 +9,11 @@
 FROM golang:latest
 
 LABEL maintainer="gillegra@gmail.com" \
-    org.label-schema.name="VSCode dev env base" \
-    org.label-schema.description="A simple base environment to use for development. Only requirements are to include Visual Studio Code and an X11 client." \
-    org.label-schema.license="MIT" \
-    org.label-schema.version="1.0" \
-    org.label-schema.schema-version="1.0" 
+  org.label-schema.name="docker-vscode" \
+  org.label-schema.version="1.1" \
+  org.label-schema.description="A simple base environment to use for development. Only requirements are to include Visual Studio Code, an X window client, and a Docker engine." \
+  org.label-schema.license="MIT" \
+  org.label-schema.schema-version="1.0" 
 
 COPY root /root
 
@@ -28,7 +28,28 @@ RUN cd /root \
   && useradd -m vscode -s /bin/bash \
   && cp install-vscode-*.sh /home/vscode/ \
   && chown vscode:vscode /home/vscode/install-vscode-extension*.sh \
-  && su - vscode -c /home/vscode/install-vscode-Go.sh
+  \
+  && su - vscode -c "code --install-extension Shan.code-settings-sync" \
+  && su - vscode -c "code --install-extension lukehoban.go" \
+  && export GOPATH=$HOME/go \
+  && echo 'export PATH=~/go/bin:/usr/local/go/bin:$PATH' >> ~/.bash_profile \
+  && . ~/.bash_profile \
+  && go get -u -v github.com/ramya-rao-a/go-outline \
+  && go get -u -v github.com/acroca/go-symbols \
+  && go get -u -v github.com/nsf/gocode \
+  && go get -u -v github.com/rogpeppe/godef \
+  && go get -u -v golang.org/x/tools/cmd/godoc \
+  && go get -u -v github.com/zmb3/gogetdoc \
+  && go get -u -v github.com/golang/lint/golint \
+  && go get -u -v github.com/fatih/gomodifytags \
+  && go get -u -v github.com/uudashr/gopkgs/cmd/gopkgs \
+  && go get -u -v golang.org/x/tools/cmd/gorename \
+  && go get -u -v sourcegraph.com/sqs/goreturns \
+  && go get -u -v github.com/cweill/gotests/... \
+  && go get -u -v golang.org/x/tools/cmd/guru \
+  && go get -u -v github.com/josharian/impl \
+  && go get -u -v github.com/haya14busa/goplay/cmd/goplay \
+  && go get github.com/derekparker/delve/cmd/dlv
 
-WORKDIR /root
-CMD su - vscode -c "code -w ."
+ENTRYPOINT [ "su", "-", "vscode", "-c" ]
+CMD [ "code -w" ]
