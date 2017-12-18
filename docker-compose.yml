@@ -1,0 +1,9 @@
+version: '3'
+services:
+  devel:
+    image: 
+      docker-vscode-golang:test
+    secrets:
+
+volumes:
+  - ..:/repos
