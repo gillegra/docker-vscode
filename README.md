@@ -1,3 +1,3 @@
-# docker-vscode-golang
+# docker-vscode
 
-Running VS Code (configured for golang) from a Docker container.  Based heavily on <https://github.com/ctaggart/golang-vscode>.
+Running VS Code from a Docker container.  Based heavily on <https://github.com/ctaggart/golang-vscode>.

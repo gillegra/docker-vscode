@@ -1,4 +1,4 @@
 .bash_history
-.vscode/
-.secrets/
-.config/
+.vscode
+**/.configs
+**/.secrets
