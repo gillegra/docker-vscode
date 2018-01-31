@@ -18,4 +18,4 @@ RUN useradd -m vscode -s /bin/bash \
 
 # ENTRYPOINT [ "su", "-", "vscode", "-c" ]
 # CMD [ "code -w" ]
-CMD [ "code -w --user-data-dir=/home/.vscode" ]
+CMD [ "code -w --user-data-dir=/home/vscode" ]

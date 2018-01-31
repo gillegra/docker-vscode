@@ -1,13 +1,16 @@
 version: '3.4'
 
 configs:
-  pubkey:
-    file: ./.configs/pubkey
+  pub_key:
+    file: ./.configs/pub_key
 secrets:
   ssh_user:
     file: ./.secrets/ssh_user
   ssh_key:
     file: ./.secrets/ssh_key
+volumes:
+  app_src:
+    external: true
 
 services:
   vscode:
@@ -16,6 +19,12 @@ services:
     build: .
     ports:
       - "8022:22"
-
-volumes:
-  - ..:/repos
+    volumes:
+      - type: volume
+        source: app_src
+        target: /usr/src/my_app
+    configs:
+      - pub_key
+    secrets:
+      - ssh_user
+      - ssh_key
