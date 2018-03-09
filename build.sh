@@ -1,2 +1,2 @@
 #!/bin/sh
-docker build -t gillegra/docker-vscode-golang .
+docker build -f ./base/Dockerfile -t gillegra/docker-vscode .
