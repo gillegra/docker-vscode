@@ -1,9 +1,21 @@
-version: '3'
+version: '3.4'
+
+configs:
+  pubkey:
+    file: ./.configs/pubkey
+secrets:
+  ssh_user:
+    file: ./.secrets/ssh_user
+  ssh_key:
+    file: ./.secrets/ssh_key
+
 services:
-  devel:
+  vscode:
     image: 
-      docker-vscode-golang:test
-    secrets:
+      docker-vscode
+    build: .
+    ports:
+      - "8022:22"
 
 volumes:
   - ..:/repos
