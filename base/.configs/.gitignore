@@ -1,0 +1,4 @@
+# We don't want to commit configurations to repos, so ignore everything in this directory
+*
+# Except this file
+!.gitignore
